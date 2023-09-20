@@ -19,10 +19,10 @@ def run():
     cv2.setMouseCallback('RGB', RGB)
 
     # 사용할 비디오 파일
-    cap = cv2.VideoCapture('골대 영상.mp4')
+    cap = cv2.VideoCapture('input/goalline.mp4')
 
     # 학습 클래스 불러오기
-    my_file = open("coco.txt", "r")
+    my_file = open("yolov8/coco.txt", "r")
     data = my_file.read()
     class_list = data.split("\n")
 
@@ -50,7 +50,7 @@ def run():
     enter_count = 0
 
     # 입장프레임 저장 파일
-    enter_frame_file = open("입장프레임.txt", "w")
+    enter_frame_file = open("frames.txt", "w")
 
     state = False # 현재 공의 상태
     previous_state = False  # 이전 상태를 추적하기 위한 변수
@@ -60,8 +60,8 @@ def run():
         if not ret:
             break
         count += 1
-        if count % 3 != 0:
-            continue
+        # if count % 3 != 0:
+        #     continue
         frame = cv2.resize(frame, (1020, 500))
 
         results = model.predict(frame)
@@ -106,7 +106,7 @@ def run():
         previous_state = state  # 현재 상태를 이전 상태로 업데이트
 
         cv2.imshow("RGB", frame)
-        if cv2.waitKey(1) & 0xFF == 27:
+        if cv2.waitKey(500) & 0xFF == 27:
             break
 
     # # 입장시 해당 프레임 출력
@@ -118,5 +118,7 @@ def run():
     cap.release()
     cv2.destroyAllWindows()
 
-    plus.makeShortFormVideo()
-    plus.makeLongVideo()
+    plus.makeRightShortFormVideo()
+    plus.makeLeftShortFormVideo()
+    plus.makeRightLongVideo()
+    plus.makeLeftLongVideo()

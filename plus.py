@@ -8,10 +8,10 @@ from ultralytics import YOLO
 def makeLeftShortFormVideo():
     model = YOLO('yolov8s.pt')
     # 원본 동영상 파일 경로
-    left_video_path = '하이라이트 좌측 영상.mp4'
+    left_video_path = 'input/left.mp4'
 
     # 학습 클래스 불러오기
-    my_file = open("coco.txt", "r")
+    my_file = open("yolov8/coco.txt", "r")
     data = my_file.read()
     class_list = data.split("\n")
 
@@ -21,7 +21,7 @@ def makeLeftShortFormVideo():
     tracker = Tracker()
 
     # 입장프레임.txt에서 프레임 번호를 읽어오기
-    with open('입장프레임.txt', 'r') as file:
+    with open('frames.txt', 'r') as file:
         frame_numbers = [int(line.strip()) for line in file]
 
     # 원본 비디오 파일 열기
@@ -106,10 +106,10 @@ def makeLeftShortFormVideo():
 def makeRightShortFormVideo():
     model = YOLO('yolov8s.pt')
     # 원본 동영상 파일 경로
-    right_video_path = '하이라이트 좌측 영상.mp4'
+    right_video_path = 'right.mp4'
 
     # 학습 클래스 불러오기
-    my_file = open("coco.txt", "r")
+    my_file = open("yolov8/coco.txt", "r")
     data = my_file.read()
     class_list = data.split("\n")
 
@@ -119,7 +119,7 @@ def makeRightShortFormVideo():
     tracker = Tracker()
 
     # 입장프레임.txt에서 프레임 번호를 읽어오기
-    with open('입장프레임.txt', 'r') as file:
+    with open('frames.txt', 'r') as file:
         frame_numbers = [int(line.strip()) for line in file]
 
     # 원본 비디오 파일 열기
@@ -203,11 +203,11 @@ def makeRightShortFormVideo():
 
 def makeLeftLongVideo():
     # 원본 동영상 파일 경로
-    left_video_path = '하이라이트 좌측 영상.mp4'
+    left_video_path = 'left.mp4'
     # 결과 동영상 파일 저장 디렉토리
     output_long_directory = 'long/'
     # 입장프레임.txt에서 프레임 번호를 읽어옵니다.
-    with open('입장프레임.txt', 'r') as file:
+    with open('frames.txt', 'r') as file:
         frame_numbers = [int(line.strip()) for line in file]
     # 원본 비디오 파일 열기
     cap = cv2.VideoCapture(left_video_path)
@@ -239,11 +239,11 @@ def makeLeftLongVideo():
 
 def makeRightLongVideo():
     # 원본 동영상 파일 경로
-    right_video_path = '하이라이트 좌측 영상.mp4'
+    right_video_path = 'right.mp4'
     # 결과 동영상 파일 저장 디렉토리
     output_long_directory = 'long/'
     # 입장프레임.txt에서 프레임 번호를 읽어옵니다.
-    with open('입장프레임.txt', 'r') as file:
+    with open('frames.txt', 'r') as file:
         frame_numbers = [int(line.strip()) for line in file]
     # 원본 비디오 파일 열기
     cap = cv2.VideoCapture(right_video_path)
