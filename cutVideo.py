@@ -1,8 +1,6 @@
 import cv2
 import time
-
-index = 0
-
+index =0
 def cut_and_slow_down_video(frame):
     left_input_video_path = "input/left.mp4"
     right_input_video_path = "input/right.mp4"
@@ -122,6 +120,7 @@ def cut(input_path, output_path, start_frame, end_frame, speed):
 
 def run():
     global index
+    index = 0
     
     with open('frames.txt', 'r') as file:
         lines = file.readlines()
