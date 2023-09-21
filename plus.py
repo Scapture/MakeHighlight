@@ -167,7 +167,7 @@ def makeRightShortFormVideo():
                 y2 = int(row[3])
                 d = int(row[5])
                 c = class_list[d]
-                if 'sports ball' in c:
+                if 'sports ball' and 'frisbee' and 'clock' and 'mouse' and 'kite' in c:
                     list.append([x1, y1, x2, y2])
             bbox_id = tracker.update(list)
 

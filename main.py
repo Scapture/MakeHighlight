@@ -19,7 +19,7 @@ def run():
     cv2.setMouseCallback('RGB', RGB)
 
     # 사용할 비디오 파일
-    cap = cv2.VideoCapture('input/goalline.mp4')
+    cap = cv2.VideoCapture('input/goalline.mov')
 
     # 학습 클래스 불러오기
     my_file = open("yolov8/coco.txt", "r")
@@ -30,9 +30,9 @@ def run():
 
     tracker = Tracker()
     # 필드박스
-    area1 = [(50, 320), (50, 70), (1020, 70), (1020, 320)]
+    area2 = [(0, 0), (0, 250), (1020, 250), (1020, 0)]
     # 골대박스
-    area2 = [(50, 900), (50, 330), (1020, 330), (1020, 900)]
+    area1 = [(0, 260), (0, 500), (1020, 500), (1020, 260)]
 
     ball_enter = {}
     frame_dict = {}  # 객체 ID를 키로 하고 해당 객체가 퇴장 또는 입장할 때의 프레임을 값으로 저장
@@ -75,6 +75,7 @@ def run():
             y2 = int(row[3])
             d = int(row[5])
             c = class_list[d]
+            # if 'sports ball' and 'frisbee' and 'clock' and 'mouse' and 'kite' in c:
             if 'sports ball' in c:
                 list.append([x1, y1, x2, y2])
         bbox_id = tracker.update(list)

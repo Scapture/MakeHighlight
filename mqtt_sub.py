@@ -13,14 +13,14 @@ def on_message(client, userdata, msg):
     print("arrived: ", message)
 
     if message == "start":
-        print("Start Highlight Detection")
-        main.run()
-        print("Cut Highlight Video")
-        # cutVideo.run()
+        # print("Start Highlight Detection")
+        # # main.run()
+        # print("Cut Highlight Video")
+        # # cutVideo.run()
         print("POST to Server")
-        # post_video.run()
+        post_video.run()
         print("Clean Directory")
-        # remove_output.run()
+        remove_output.run()
 
 client = mqtt.Client()
 client.on_connect = on_connect
