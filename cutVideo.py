@@ -15,12 +15,12 @@ def cut_and_slow_down_video(frame):
 
 
     # 들어온 Frame 기준으로 기본 속도(앞 뒤 100) 자르기
-    normal_start_frame_number = frame - 100
-    normal_end_frame_number = frame + 100
+    normal_start_frame_number = frame - 60
+    normal_end_frame_number = frame + 60
     
     # 들어온 Frame 기준으로 느린 속도(앞 뒤 100) 자르기
-    slow_start_frame_number = frame - 50
-    slow_end_frame_number = frame + 50
+    slow_start_frame_number = frame - 30
+    slow_end_frame_number = frame + 30
 
     # 좌측 영상 자르기(기본 속도)
     cut(left_input_video_path, left_output_normal, normal_start_frame_number, normal_end_frame_number, 1)
@@ -40,7 +40,7 @@ def cut_and_slow_down_video(frame):
 
     fps = left_normal.get(cv2.CAP_PROP_FPS)
     print(fps)
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    fourcc = cv2.VideoWriter_fourcc(*'X264')
     width = int(left_normal.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(left_normal.get(cv2.CAP_PROP_FRAME_HEIGHT))
     output = cv2.VideoWriter(video_path, fourcc, 30, (width, height))
