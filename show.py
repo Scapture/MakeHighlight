@@ -37,7 +37,7 @@ def run():
     # 입장 횟수 카운터
     enter_count = 0
 
-    after_change_state = 0
+    after_change_state = 30
 
     # 입장프레임 저장 파일
     enter_frame_file = open("frames.txt", "w")
@@ -71,7 +71,7 @@ def run():
                 list.append([x1, y1, x2, y2])
         bbox_id = tracker.update(list)
         
-        if after_change_state >=100:
+        if after_change_state >=30:
                     state = False
 
         for bbox in bbox_id:
@@ -103,7 +103,7 @@ def run():
         previous_state = state  # 현재 상태를 이전 상태로 업데이트
 
         cv2.imshow("RGB", frame)
-        if cv2.waitKey(1) & 0xFF == 27:
+        if cv2.waitKey(500) & 0xFF == 27:
             break
 
     # # 입장시 해당 프레임 출력
