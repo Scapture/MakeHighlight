@@ -14,12 +14,12 @@ def on_message(client, userdata, msg):
 
     if message == "start":
         print("Start Highlight Detection")
-        # main.run()
+        main.run()
         # show.run()
         print("Cut Highlight Video")
         # cutVideo.run()
         print("POST to Server")
-        post_video.run()
+        # post_video.run()
         print("Clean Directory")
         # remove_output.run()
 

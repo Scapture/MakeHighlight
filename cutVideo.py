@@ -15,8 +15,8 @@ def cut_and_slow_down_video(frame):
 
 
     # 들어온 Frame 기준으로 기본 속도(앞 뒤 100) 자르기
-    normal_start_frame_number = frame - 60
-    normal_end_frame_number = frame + 60
+    normal_start_frame_number = frame - 50
+    normal_end_frame_number = frame + 50
     
     # 들어온 Frame 기준으로 느린 속도(앞 뒤 100) 자르기
     slow_start_frame_number = frame - 10
