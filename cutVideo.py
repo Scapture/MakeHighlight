@@ -19,17 +19,17 @@ def cut_and_slow_down_video(frame):
     normal_end_frame_number = frame + 60
     
     # 들어온 Frame 기준으로 느린 속도(앞 뒤 100) 자르기
-    slow_start_frame_number = frame - 30
-    slow_end_frame_number = frame + 30
+    slow_start_frame_number = frame - 10
+    slow_end_frame_number = frame + 10
 
     # 좌측 영상 자르기(기본 속도)
-    cut(left_input_video_path, left_output_normal, normal_start_frame_number, normal_end_frame_number, 1)
+    cut(left_input_video_path, left_output_normal, normal_start_frame_number, normal_end_frame_number, 5)
     # 우측 영상 자르기(기본 속도)
-    cut(right_input_video_path, right_output_normal, normal_start_frame_number, normal_end_frame_number, 1)
+    cut(right_input_video_path, right_output_normal, normal_start_frame_number, normal_end_frame_number, 5)
     # 좌측 영상 자르기(느린 속도)
-    cut(left_input_video_path, left_output_slow, slow_start_frame_number, slow_end_frame_number, 0.5)
+    cut(left_input_video_path, left_output_slow, slow_start_frame_number, slow_end_frame_number, 4)
     # 우측 영상 자르기(느린 속도)
-    cut(right_input_video_path, right_output_slow, slow_start_frame_number, slow_end_frame_number, 0.5)
+    cut(right_input_video_path, right_output_slow, slow_start_frame_number, slow_end_frame_number, 4)
 
 
     #합치기
@@ -43,7 +43,7 @@ def cut_and_slow_down_video(frame):
     fourcc = cv2.VideoWriter_fourcc(*'X264')
     width = int(left_normal.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(left_normal.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    output = cv2.VideoWriter(video_path, fourcc, 30, (width, height))
+    output = cv2.VideoWriter(video_path, fourcc, fps, (width, height))
 
     while True:
         ret1, frame1 = left_normal.read()
@@ -56,10 +56,10 @@ def cut_and_slow_down_video(frame):
                     if not ret4:
                         break
                     else:
-                        for _ in range(int(fps * 0.1) - 1):
+                        for _ in range(int(fps * 0.5) - 1):
                             output.write(frame4)    
                 else:
-                    for _ in range(int(fps * 0.1) - 1):
+                    for _ in range(int(fps * 0.5) - 1):
                         output.write(frame3)
             else:
                 output.write(frame2)    
@@ -99,7 +99,7 @@ def cut(input_path, output_path, start_frame, end_frame, speed):
         end_frame = total_frames
 
     vc.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    fourcc = cv2.VideoWriter_fourcc(*'X264')
     vw = cv2.VideoWriter(output_path, fourcc, fps*speed, (width, height))
 
     frame_count = start_frame

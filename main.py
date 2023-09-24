@@ -19,7 +19,7 @@ def run():
     cv2.setMouseCallback('RGB', RGB)
 
     # 사용할 비디오 파일
-    cap = cv2.VideoCapture('input/goalline.mov')
+    cap = cv2.VideoCapture('input/goalline.mp4')
 
     # 학습 클래스 불러오기
     my_file = open("yolov8/coco.txt", "r")
@@ -30,9 +30,9 @@ def run():
 
     tracker = Tracker()
     # 필드박스
-    area2 = [(0, 0), (0, 250), (1020, 250), (1020, 0)]
+    area2 = [(0, 0), (0, 500), (300, 500), (300, 0)]
     # 골대박스
-    area1 = [(0, 260), (0, 500), (1020, 500), (1020, 260)]
+    area1 = [(310, 0), (310, 500), (1020, 500), (1020, 0)]
 
     ball_enter = {}
     frame_dict = {}  # 객체 ID를 키로 하고 해당 객체가 퇴장 또는 입장할 때의 프레임을 값으로 저장
@@ -83,8 +83,8 @@ def run():
         for bbox in bbox_id:
             x3, y3, x4, y4, id = bbox
 
-            results1 = cv2.pointPolygonTest(np.array(area1, np.int32), ((x4, y4)), False)
-            results2 = cv2.pointPolygonTest(np.array(area2, np.int32), ((x4, y4)), False)
+            results1 = cv2.pointPolygonTest(np.array(area1, np.int32), (((x3+x4)/2, (y3+y4)/2)), False)
+            results2 = cv2.pointPolygonTest(np.array(area2, np.int32), (((x3+x4)/2, (y3+y4)/2)), False)
 
             if results2 >= 0:
                 state = True  # 객체가 area2에 있음
@@ -107,7 +107,7 @@ def run():
         previous_state = state  # 현재 상태를 이전 상태로 업데이트
 
         cv2.imshow("RGB", frame)
-        if cv2.waitKey(500) & 0xFF == 27:
+        if cv2.waitKey(1) & 0xFF == 27:
             break
 
     # # 입장시 해당 프레임 출력
@@ -119,7 +119,7 @@ def run():
     cap.release()
     cv2.destroyAllWindows()
 
-    plus.makeRightShortFormVideo()
-    plus.makeLeftShortFormVideo()
-    plus.makeRightLongVideo()
-    plus.makeLeftLongVideo()
+    # plus.makeRightShortFormVideo()
+    # plus.makeLeftShortFormVideo()
+    # plus.makeRightLongVideo()
+    # plus.makeLeftLongVideo()

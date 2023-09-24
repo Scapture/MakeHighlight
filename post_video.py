@@ -3,13 +3,16 @@ import random
 import string
 import requests
 import mqtt_pub
+import datetime
+
 # 서버의 엔드포인트 URL 설정
 
 def run():
-    server_url = 'http://192.168.1.11:8000/post'
+    server_url = 'http://192.168.0.4:8000/post'
     # POST 요청에 함께 보낼 데이터 설정 (예: 헤더, 파라미터, 기타 데이터)
     game_number = random.randrange(1, 10000) # 1부터 10 사이의 난수 생성
-    data = {'game': game_number}
+    now = datetime.datetime.now()
+    data = {'game': game_number, 'create_at': now}
     # 영상 파일이 있는 폴더 경로 설정
     video_folder_path = './output/'
     # video_folder_path 내의 모든 파일 목록 가져오기
